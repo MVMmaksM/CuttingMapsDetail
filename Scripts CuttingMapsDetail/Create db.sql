@@ -1,5 +1,6 @@
 USE [master]
 
+
 DECLARE @kill VARCHAR(8000) = '';  
 SELECT @kill = @kill + 'kill ' + CONVERT(VARCHAR(5), session_id) + ';'  
 FROM sys.dm_exec_sessions
@@ -70,3 +71,18 @@ CREATE TABLE [dbo].[CuttingMapDetail]
 	CONSTRAINT FK__CuttingMapDetail_DetailId FOREIGN KEY([DetailId]) REFERENCES [dbo].[Detail]([Id])
 
 )
+GO
+USE master
+GO
+CREATE LOGIN [User] WITH PASSWORD=N'qwerty123!@#', DEFAULT_DATABASE=[CuttingMapsDetail]
+CREATE LOGIN [Admin] WITH PASSWORD=N'Ktnj2023!@#', DEFAULT_DATABASE=[CuttingMapsDetail]
+GO
+USE CuttingMapsDetail
+GO
+CREATE USER [User] FOR LOGIN [User]
+CREATE USER [Admin] FOR LOGIN [Admin]
+GO
+GRANT EXECUTE ON SCHEMA::[dbo] TO [User]
+GRANT SELECT, INSERT, DELETE, UPDATE ON SCHEMA::[dbo] TO [Admin]
+
+

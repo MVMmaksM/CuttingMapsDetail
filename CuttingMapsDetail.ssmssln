@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# SQL Server Management Studio Solution File, Format Version 19.00
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "Scripts CuttingMapsDetail", "Scripts CuttingMapsDetail\Scripts CuttingMapsDetail.ssmssqlproj", "{A6AF2749-0088-4441-9296-15D103A626E8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Default = Default|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F7216C0-B058-45B5-B79F-97C4BFE73156}.Default|Default.ActiveCfg = Default
+		{A6AF2749-0088-4441-9296-15D103A626E8}.Default|Default.ActiveCfg = Default
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {95F748E0-3933-4139-8F76-0F3C945417BB}
+	EndGlobalSection
+EndGlobal
