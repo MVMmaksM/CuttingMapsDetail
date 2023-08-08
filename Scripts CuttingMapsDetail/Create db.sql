@@ -17,7 +17,7 @@ CREATE DATABASE CuttingMapsDetail
 GO
 USE CuttingMapsDetail
 GO
--- создание таблицы для хранения материалов
+-- СЃРѕР·РґР°РЅРёРµ С‚Р°Р±Р»РёС†С‹ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РјР°С‚РµСЂРёР°Р»РѕРІ
 CREATE TABLE [dbo].[Material]
 (
 	[Id] BIGINT IDENTITY(1,1) NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE [dbo].[Material]
 	CONSTRAINT PK__Material PRIMARY KEY CLUSTERED([Id])
 )
 GO
--- создание таблицы для хранения листов
+-- СЃРѕР·РґР°РЅРёРµ С‚Р°Р±Р»РёС†С‹ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ Р»РёСЃС‚РѕРІ
 CREATE TABLE [dbo].[Sheet] 
 (
 	[Id] BIGINT IDENTITY(1,1) NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE [dbo].[Sheet]
 	CONSTRAINT PK__Sheet PRIMARY KEY CLUSTERED([Id])
 )
 GO
--- создание таблицы для хранения карт раскроя
+-- СЃРѕР·РґР°РЅРёРµ С‚Р°Р±Р»РёС†С‹ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РєР°СЂС‚ СЂР°СЃРєСЂРѕСЏ
 CREATE TABLE [dbo].[CuttingMap]
 (
 	[Id] BIGINT IDENTITY(1,1) NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE [dbo].[CuttingMap]
 	CONSTRAINT FK__CuttingMap_SheetId FOREIGN KEY([SheetId]) REFERENCES [dbo].[Sheet]([Id])
 )
 GO
--- создание таблицы для хранения деталей
+-- СЃРѕР·РґР°РЅРёРµ С‚Р°Р±Р»РёС†С‹ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РґРµС‚Р°Р»РµР№
 CREATE TABLE [dbo].[Detail]
 (
 	[Id] BIGINT IDENTITY(1,1) NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE [dbo].[Detail]
 	CONSTRAINT PK__Detail PRIMARY KEY CLUSTERED([Id])
 )
 GO
--- создание таблицы для хранения карт раскроя детали 
+-- СЃРѕР·РґР°РЅРёРµ С‚Р°Р±Р»РёС†С‹ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РєР°СЂС‚ СЂР°СЃРєСЂРѕСЏ РґРµС‚Р°Р»Рё 
 CREATE TABLE [dbo].[CuttingMapDetail]
 (
 	[CuttingMapId] BIGINT NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE [dbo].[CuttingMapDetail]
 
 )
 GO
--- создание схемы для представлений пользователй
+-- СЃРѕР·РґР°РЅРёРµ СЃС…РµРјС‹ РґР»СЏ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёР№ РїРѕР»СЊР·РѕРІР°С‚РµР»Р№
 CREATE SCHEMA user_views
 GO
 CREATE VIEW [user_views].[all_material_vw]
@@ -108,19 +108,17 @@ GO
 CREATE PROCEDURE sp_
 USE master
 GO
--- создание пользователей для сервера
+-- СЃРѕР·РґР°РЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ РґР»СЏ СЃРµСЂРІРµСЂР°
 CREATE LOGIN [User] WITH PASSWORD=N'qwerty123!@#', DEFAULT_DATABASE=[CuttingMapsDetail]
 CREATE LOGIN [Admin] WITH PASSWORD=N'Ktnj2023!@#', DEFAULT_DATABASE=[CuttingMapsDetail]
 GO
 USE CuttingMapsDetail
 GO
--- создание пользователй для базы
+-- СЃРѕР·РґР°РЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»Р№ РґР»СЏ Р±Р°Р·С‹
 CREATE USER [User] FOR LOGIN [User]
 CREATE USER [Admin] FOR LOGIN [Admin]
 GO
--- предоставление разрешений пользователям
+-- РїСЂРµРґРѕСЃС‚Р°РІР»РµРЅРёРµ СЂР°Р·СЂРµС€РµРЅРёР№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏРј
 GRANT SELECT ON SCHEMA::[user_views] TO [User]
 GRANT EXECUTE ON SCHEMA::[dbo] TO [User]
 GRANT EXECUTE, SELECT, INSERT, DELETE, UPDATE ON SCHEMA::[dbo] TO [Admin]
-
-
