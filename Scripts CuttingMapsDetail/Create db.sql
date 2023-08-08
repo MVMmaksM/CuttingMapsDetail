@@ -17,6 +17,7 @@ CREATE DATABASE CuttingMapsDetail
 GO
 USE CuttingMapsDetail
 GO
+-- создание таблицы для хранения материалов
 CREATE TABLE [dbo].[Material]
 (
 	[Id] BIGINT IDENTITY(1,1) NOT NULL,
@@ -27,6 +28,7 @@ CREATE TABLE [dbo].[Material]
 	CONSTRAINT PK__Material PRIMARY KEY CLUSTERED([Id])
 )
 GO
+-- создание таблицы для хранения листов
 CREATE TABLE [dbo].[Sheet] 
 (
 	[Id] BIGINT IDENTITY(1,1) NOT NULL,
@@ -38,6 +40,7 @@ CREATE TABLE [dbo].[Sheet]
 	CONSTRAINT PK__Sheet PRIMARY KEY CLUSTERED([Id])
 )
 GO
+-- создание таблицы для хранения карт раскроя
 CREATE TABLE [dbo].[CuttingMap]
 (
 	[Id] BIGINT IDENTITY(1,1) NOT NULL,
@@ -51,6 +54,7 @@ CREATE TABLE [dbo].[CuttingMap]
 	CONSTRAINT FK__CuttingMap_SheetId FOREIGN KEY([SheetId]) REFERENCES [dbo].[Sheet]([Id])
 )
 GO
+-- создание таблицы для хранения деталей
 CREATE TABLE [dbo].[Detail]
 (
 	[Id] BIGINT IDENTITY(1,1) NOT NULL,
@@ -61,6 +65,7 @@ CREATE TABLE [dbo].[Detail]
 	CONSTRAINT PK__Detail PRIMARY KEY CLUSTERED([Id])
 )
 GO
+-- создание таблицы для хранения карт раскроя детали 
 CREATE TABLE [dbo].[CuttingMapDetail]
 (
 	[CuttingMapId] BIGINT NOT NULL,
@@ -72,17 +77,50 @@ CREATE TABLE [dbo].[CuttingMapDetail]
 
 )
 GO
+-- создание схемы для представлений пользователй
+CREATE SCHEMA user_views
+GO
+CREATE VIEW [user_views].[all_material_vw]
+AS
+SELECT *
+FROM [dbo].[Material]
+GO
+CREATE VIEW [user_views].[all_sheet_vw]
+AS
+SELECT *
+FROM [dbo].[Sheet]
+GO
+CREATE VIEW [user_views].[all_detail_vw]
+AS
+SELECT *
+FROM [dbo].[Detail]
+GO
+CREATE VIEW [user_views].[all_CuttingMap_vw]
+AS
+SELECT *
+FROM [dbo].[CuttingMap]
+GO
+CREATE VIEW [user_views].[all_CuttingMapDetail_vw]
+AS
+SELECT *
+FROM [dbo].[CuttingMapDetail]
+GO
+CREATE PROCEDURE sp_
 USE master
 GO
+-- создание пользователей для сервера
 CREATE LOGIN [User] WITH PASSWORD=N'qwerty123!@#', DEFAULT_DATABASE=[CuttingMapsDetail]
 CREATE LOGIN [Admin] WITH PASSWORD=N'Ktnj2023!@#', DEFAULT_DATABASE=[CuttingMapsDetail]
 GO
 USE CuttingMapsDetail
 GO
+-- создание пользователй для базы
 CREATE USER [User] FOR LOGIN [User]
 CREATE USER [Admin] FOR LOGIN [Admin]
 GO
+-- предоставление разрешений пользователям
+GRANT SELECT ON SCHEMA::[user_views] TO [User]
 GRANT EXECUTE ON SCHEMA::[dbo] TO [User]
-GRANT SELECT, INSERT, DELETE, UPDATE ON SCHEMA::[dbo] TO [Admin]
+GRANT EXECUTE, SELECT, INSERT, DELETE, UPDATE ON SCHEMA::[dbo] TO [Admin]
 
 
